@@ -1,0 +1,21 @@
+<VirtualHost *:80>
+    ServerAdmin	<%= @adminemail %>
+    ServerName <%= @servername %>
+    ServerAlias www.<%= @servername %>
+	Redirect / https://<%= @servername %>
+    ErrorLog /var/www/<%- @servername -%>/logs/error.log
+    CustomLog /var/www/<%= @servername -%>/logs/access.log combined
+</Virtual Host>
+
+<VirtualHost *:443>
+  ServerAdmin	<%= @adminemail %>
+  ServerName <%= @servername %>
+  ServerAlias www.<%= @servername %>
+SSLEngine on
+        SSLCertificateFile /etc/httpd/ssl/xxxxx.crt
+        SSLCertificateKeyFile /etc/httpd/ssl/xxxxx.key
+  Options FollowSymLinks
+  DocumentRoot /var/www/<%= @servername -%>/public_html/
+    ErrorLog /var/www/<%- @servername -%>/logs/error.log
+    CustomLog /var/www/<%= @servername -%>/logs/access.log combined
+  </VirtualHost>
